@@ -13,6 +13,8 @@ import { APIService } from "./API.service";
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
+  todos: Array<any>;
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -29,11 +31,14 @@ export class AppComponent {
       description: 'testing'
     });
   }
-  
+
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.apiService.ListTodos().then((evt) => {
+        this.todos = evt.items;
+      });
     });
   }
 }
