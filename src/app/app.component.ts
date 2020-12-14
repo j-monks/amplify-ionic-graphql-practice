@@ -39,6 +39,10 @@ export class AppComponent {
       this.apiService.ListTodos().then((evt) => {
         this.todos = evt.items;
       });
+      this.apiService.OnCreateTodoListener.subscribe((evt) => {
+        const data = (evt as any).value.data.onCreateTodo;
+        this.todos = [...this.todos, data];
+      })
     });
   }
 }
